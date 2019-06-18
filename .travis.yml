@@ -5,14 +5,15 @@ install:
   - sudo dpkg -i hugo*.deb
 
 script:
-  - hugo
+  - hugo -d "$TRAVIS_BRANCH"
 
 deploy:
   provider: pages
   github_token: $GITHUB_TOKEN
-  local_dir: public
-  fqdn: buildpacks.io
+  local_dir: $TRAVIS_BRANCH
+  # fqdn: buildpacks.io
   skip_cleanup: true
   verbose: true
+  keep_history: true
   on:
     branch: master
